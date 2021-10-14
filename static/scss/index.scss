@@ -1,0 +1,14 @@
+@use 'config';
+
+div.container {
+    max-width: 600px;
+}
+
+.navbar-toggler {
+    padding: 0;
+    background: none;
+    border: none;
+    &:focus {
+        outline: none;
+    }
+}

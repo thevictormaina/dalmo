@@ -1,0 +1,21 @@
+@use "sass:map";
+$colors: (
+    "dark-purple": #631A79,
+    "purple": #8429A1,
+    "lavender-gray": #BDC0DB,
+    "light-gray": #E5E9F5,
+    "light-pink": #FFBEFF,
+    "white": white,
+    "black": black,
+    "lighter-color": #FEF0FE,
+    "dark-gray": #33354D,
+);
+
+@each $colorName, $color in $colors {
+    .bg-#{$colorName} {
+        background-color: $color;
+    }
+    .text-#{$colorName} {
+        color: $color;
+    }
+}
