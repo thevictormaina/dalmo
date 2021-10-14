@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Raleway:wght@800&display=swap");
 .bg-dark-purple {
   background-color: #631A79;
 }
 
-.text-dark-purple {
+.text-dark-purple, .color-dark-purple {
   color: #631A79;
 }
 
@@ -10,7 +11,7 @@
   background-color: #8429A1;
 }
 
-.text-purple {
+.text-purple, .color-purple {
   color: #8429A1;
 }
 
@@ -18,7 +19,7 @@
   background-color: #BDC0DB;
 }
 
-.text-lavender-gray {
+.text-lavender-gray, .color-lavender-gray {
   color: #BDC0DB;
 }
 
@@ -26,7 +27,7 @@
   background-color: #E5E9F5;
 }
 
-.text-light-gray {
+.text-light-gray, .color-light-gray {
   color: #E5E9F5;
 }
 
@@ -34,7 +35,7 @@
   background-color: #FFBEFF;
 }
 
-.text-light-pink {
+.text-light-pink, .color-light-pink {
   color: #FFBEFF;
 }
 
@@ -42,7 +43,7 @@
   background-color: white;
 }
 
-.text-white {
+.text-white, .color-white {
   color: white;
 }
 
@@ -50,15 +51,15 @@
   background-color: black;
 }
 
-.text-black {
+.text-black, .color-black {
   color: black;
 }
 
-.bg-lighter-color {
+.bg-lighter-pink {
   background-color: #FEF0FE;
 }
 
-.text-lighter-color {
+.text-lighter-pink, .color-lighter-pink {
   color: #FEF0FE;
 }
 
@@ -66,16 +67,56 @@
   background-color: #33354D;
 }
 
-.text-dark-gray {
+.text-dark-gray, .color-dark-gray {
   color: #33354D;
 }
 
-div.container {
-  max-width: 600px;
+body,
+html {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+body .title,
+html .title {
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+}
+body .title-2,
+html .title-2 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+}
+body .heading,
+html .heading {
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+body .heading-2,
+html .heading-2 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+body .small,
+html .small {
+  font-size: 10px;
+}
+
+body, html {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 720px;
 }
 
 .navbar-toggler {
-  padding: 0;
   background: none;
   border: none;
 }

@@ -131,8 +131,6 @@ STATICFILES_DIRS = [
     ("images", os.path.join(BASE_DIR, "static/images/")),
 ]
 
-print("STATIC: ", STATICFILES_DIRS[0])
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

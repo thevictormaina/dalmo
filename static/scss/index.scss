@@ -1,11 +1,15 @@
 @use 'config';
+@use 'fonts';
 
-div.container {
-    max-width: 600px;
+body, html {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 720px;
 }
 
 .navbar-toggler {
-    padding: 0;
     background: none;
     border: none;
     &:focus {

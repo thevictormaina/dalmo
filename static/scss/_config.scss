@@ -1,4 +1,5 @@
 @use "sass:map";
+
 $colors: (
     "dark-purple": #631A79,
     "purple": #8429A1,
@@ -7,7 +8,7 @@ $colors: (
     "light-pink": #FFBEFF,
     "white": white,
     "black": black,
-    "lighter-color": #FEF0FE,
+    "lighter-pink": #FEF0FE,
     "dark-gray": #33354D,
 );
 
@@ -15,7 +16,12 @@ $colors: (
     .bg-#{$colorName} {
         background-color: $color;
     }
-    .text-#{$colorName} {
+    .text-#{$colorName}, .color-#{$colorName} {
         color: $color;
     }
+}
+
+// Get single color from colors map
+@function color($color){
+    @return map.get($colors, $color);
 }
