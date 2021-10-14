@@ -71,6 +71,14 @@
   color: #33354D;
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
+.text-transparent, .color-transparent {
+  color: transparent;
+}
+
 body,
 html {
   font-family: "Noto Sans", sans-serif;
@@ -107,9 +115,23 @@ body .small,
 html .small {
   font-size: 10px;
 }
+body a.nav-item,
+html a.nav-item {
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: #631A79;
+}
 
 body, html {
   box-sizing: border-box;
+}
+body .vertical-align-top, html .vertical-align-top {
+  vertical-align: top;
+}
+body .vertical-align-middle, html .vertical-align-middle {
+  vertical-align: middle;
 }
 
 .container {

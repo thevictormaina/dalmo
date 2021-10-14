@@ -1,3 +1,4 @@
+@use "config";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Raleway:wght@800&display=swap");
 
 @mixin headingTitle($font-size) {
@@ -30,5 +31,11 @@ html {
 
     .small {
         font-size: 10px;
+    }
+
+    a.nav-item {
+        @include headingTitle(13px);
+        text-transform: uppercase;
+        color: config.color('dark-purple');
     }
 }

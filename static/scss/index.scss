@@ -3,6 +3,15 @@
 
 body, html {
     box-sizing: border-box;
+
+    .vertical-align {
+        &-top {
+            vertical-align: top;
+        }
+        &-middle {
+            vertical-align: middle;
+        }
+    }
 }
 
 .container {

@@ -10,6 +10,7 @@ $colors: (
     "black": black,
     "lighter-pink": #FEF0FE,
     "dark-gray": #33354D,
+    "transparent": transparent,
 );
 
 @each $colorName, $color in $colors {
