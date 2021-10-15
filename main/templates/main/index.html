@@ -1,5 +1,16 @@
 {% extends 'main/base.html' %}
 
 {% block body %}
-<p>This is a test.</p>
+
+<div class="container">
+
+  <div class="rounded-card">
+    <h1 class="title-2 text-purple">Good morning <span class="iconify" data-icon="fa-solid:sun"></span></h1>
+    <p>Remember to make an entry today.</p>
+  </div>
+
+  {% include 'main/date_selector.html' %}
+
+</div>
+
 {% endblock body %}

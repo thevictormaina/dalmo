@@ -1,0 +1,21 @@
+@use 'config';
+
+input {
+    outline: none;
+    border: none;
+    border-bottom: 3px config.color('light-pink') solid;
+    width: 100%;
+
+    &[type="date"]{
+        width: max-content;
+        display: -webkit-inline-flex;
+        &::-webkit-datetime-edit {
+            padding-right: 3px;
+            max-width: fit-content;
+        }
+        &::-webkit-calendar-picker-indicator {
+            // display: none;
+            margin: 0;
+        }
+    }
+}
