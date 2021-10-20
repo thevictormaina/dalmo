@@ -13,16 +13,25 @@ $colors: (
     "transparent": transparent,
 );
 
+// Get single color from colors map
+@function color($color){
+    @return map.get($colors, $color);
+}
+
+@function checkBgColor($bgColor){
+    @if lightness($bgColor) > 60 {
+        @return color('dark-purple');
+    } @else {
+        @return color('white');
+    }
+}
+
 @each $colorName, $color in $colors {
     .bg-#{$colorName} {
         background-color: $color;
+        color: checkBgColor($color);
     }
     .text-#{$colorName}, .color-#{$colorName} {
         color: $color;
     }
-}
-
-// Get single color from colors map
-@function color($color){
-    @return map.get($colors, $color);
 }

@@ -11,6 +11,26 @@
 
   {% include 'main/date_selector.html' %}
 
+  <section class="mb-5">
+
+    <div class="d-flex align-items-center justify-content-between mb-1">
+      <h1 class="title-2">Moments</h1>
+      <div class="heading-2">7 Moments</div>
+    </div>
+    <p class="mb-4">Emotions from recorded moments in selected daterange.</p>
+    <div class="rounded-card">
+      <ul class="p-0 m-0">
+        {% comment %} Add for loop here {% endcomment %}
+        <li class="d-flex p-2 align-items-center">
+          <p class="m-0">happy</p>
+          <hr>
+          <p class="m-0 font-weight-bold text-dark-purple">2</p>
+        </li>
+      </ul>
+    </div>
+    <a href="#"><button class="btn bg-purple">View Moments <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
+  </section>
+
 </div>
 
 {% endblock body %}

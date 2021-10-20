@@ -1,0 +1,26 @@
+@use 'config';
+@use 'fonts';
+
+@mixin button {
+    width: 100%;
+    border: none;
+    @include fonts.headingTitle(13px);
+    text-transform: uppercase;
+    
+    &:focus {
+        outline: none;
+    }
+}
+
+.btn {
+    @include button;
+    padding: 1rem;
+    border-radius: 10px;
+
+    &-compact {
+        @include button;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
+        border-radius: 5px;
+    }
+}

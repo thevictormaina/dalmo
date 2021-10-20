@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@500;700&family=Raleway:wght@800&display=swap");
 .bg-dark-purple {
   background-color: #631A79;
+  color: white;
 }
 
 .text-dark-purple, .color-dark-purple {
@@ -9,6 +10,7 @@
 
 .bg-purple {
   background-color: #8429A1;
+  color: white;
 }
 
 .text-purple, .color-purple {
@@ -17,6 +19,7 @@
 
 .bg-lavender-gray {
   background-color: #BDC0DB;
+  color: #631A79;
 }
 
 .text-lavender-gray, .color-lavender-gray {
@@ -25,6 +28,7 @@
 
 .bg-light-gray {
   background-color: #E5E9F5;
+  color: #631A79;
 }
 
 .text-light-gray, .color-light-gray {
@@ -33,6 +37,7 @@
 
 .bg-light-pink {
   background-color: #FFBEFF;
+  color: #631A79;
 }
 
 .text-light-pink, .color-light-pink {
@@ -41,6 +46,7 @@
 
 .bg-white {
   background-color: white;
+  color: #631A79;
 }
 
 .text-white, .color-white {
@@ -49,6 +55,7 @@
 
 .bg-black {
   background-color: black;
+  color: white;
 }
 
 .text-black, .color-black {
@@ -57,6 +64,7 @@
 
 .bg-lighter-pink {
   background-color: #FEF0FE;
+  color: #631A79;
 }
 
 .text-lighter-pink, .color-lighter-pink {
@@ -65,6 +73,7 @@
 
 .bg-dark-gray {
   background-color: #33354D;
+  color: white;
 }
 
 .text-dark-gray, .color-dark-gray {
@@ -73,6 +82,7 @@
 
 .bg-transparent {
   background-color: transparent;
+  color: white;
 }
 
 .text-transparent, .color-transparent {
@@ -139,6 +149,11 @@ html a.nav-item {
   border-radius: 10px;
   margin: 1rem 0;
 }
+.rounded-card hr {
+  border-color: #FFBEFF;
+  flex-grow: 1;
+  margin: 0 1rem;
+}
 
 input {
   outline: none;
@@ -156,6 +171,34 @@ input[type=date]::-webkit-datetime-edit {
 }
 input[type=date]::-webkit-calendar-picker-indicator {
   margin: 0;
+}
+
+.btn {
+  width: 100%;
+  border: none;
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.btn:focus {
+  outline: none;
+}
+.btn-compact {
+  width: 100%;
+  border: none;
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  border-radius: 5px;
+}
+.btn-compact:focus {
+  outline: none;
 }
 
 body, html {
@@ -178,27 +221,6 @@ body .vertical-align-middle, html .vertical-align-middle {
   margin-right: -10.5px;
 }
 .navbar-toggler:focus {
-  outline: none;
-}
-
-.btn {
-  border-radius: 10px;
-  padding: 1rem;
-  width: 100%;
-  border: none;
-  margin: 1rem 0;
-}
-.btn:focus {
-  outline: none;
-}
-.btn-compact {
-  border-radius: 5px;
-  border: none;
-  padding: 0.5rem 1rem;
-  width: 100%;
-  margin: 1rem 0;
-}
-.btn-compact:focus {
   outline: none;
 }
 
