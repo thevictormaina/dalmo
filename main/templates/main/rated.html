@@ -1,0 +1,9 @@
+<div class="rating d-flex">
+    {% for circle in "x"|ljust:"5"  %}
+        {% if forloop.counter <= rating %}
+            <span class="iconify mx-1" data-icon="akar-icons:circle-fill" data-width="16"></span>
+        {% else %}
+            <span class="iconify mx-1" data-icon="akar-icons:circle" data-width="16"></span>
+        {% endif %}
+    {% endfor %}
+</div>

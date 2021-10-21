@@ -15,7 +15,8 @@ html {
     color: config.color('dark-gray');
 
     p, h1, h2, h3 {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0;
+        margin-block-end: 0;
     }
 
     .title {

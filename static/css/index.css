@@ -201,7 +201,8 @@ html p,
 html h1,
 html h2,
 html h3 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
+  margin-block-end: 0;
 }
 body .title,
 html .title {
@@ -309,6 +310,13 @@ body .vertical-align-top, html .vertical-align-top {
 }
 body .vertical-align-middle, html .vertical-align-middle {
   vertical-align: middle;
+}
+body footer, html footer {
+  border-top: 1px solid #E5E9F5;
+  background-color: white;
+  color: #8429A1;
+  font-size: 12px;
+  text-align: center;
 }
 
 .container {

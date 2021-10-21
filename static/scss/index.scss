@@ -15,6 +15,15 @@ body, html {
             vertical-align: middle;
         }
     }
+
+    footer {
+        border-top: 1px solid config.color('light-gray');
+        background-color: white;
+        color: config.color('purple');
+        font-size: 12px;
+        text-align: center;
+    }
+
 }
 
 .container {

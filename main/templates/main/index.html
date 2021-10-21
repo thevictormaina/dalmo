@@ -5,15 +5,15 @@
 <div class="container">
 
   <div class="rounded-card">
-    <h1 class="title-2 text-purple">Good morning <span class="iconify" data-icon="fa-solid:sun"></span></h1>
+    <h1 class="title-2 text-purple mb-1">Good morning <span class="iconify ml-3" data-icon="fa-solid:sun"></span></h1>
     <p>Remember to make an entry today.</p>
   </div>
 
   {% include 'main/date_selector.html' %}
 
+  {% comment %} MOMENT SECTION {% endcomment %}
   <section class="mb-5">
-
-    <div class="d-flex align-items-center justify-content-between mb-1">
+    <div class="d-flex align-items-center justify-content-between mb-3">
       <h1 class="title-2">Moments</h1>
       <div class="heading-2">7 Moments</div>
     </div>
@@ -21,7 +21,7 @@
     <div class="rounded-card">
       <ul class="p-0 m-0">
         {% comment %} Add for loop here {% endcomment %}
-        <li class="d-flex p-2 align-items-center">
+        <li class="d-flex py-2 align-items-center">
           <p class="m-0">happy</p>
           <hr>
           <p class="m-0 font-weight-bold text-dark-purple">2</p>
@@ -29,6 +29,57 @@
       </ul>
     </div>
     <a href="#"><button class="btn btn-purple">View Moments <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
+  </section>
+
+  {% comment %} ENTRY SECTION {% endcomment %}
+  <section class="mb-5">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h1 class="title-2">Entries</h1>
+      {% comment %} Add if else statement here for plural {% endcomment %}
+      <div class="heading-2">3 Entries</div>
+    </div>
+    <p class="mb-4">Calculated averages of all daily entries in the selected date range.</p>
+
+    {% comment %} DYNAMIC AREA - Interpolate data here {% endcomment %}
+    
+    {% comment %} Average Rating {% endcomment %}
+    <div class="text-dark-purple rounded-card">
+      <h2 class="heading-2 mb-3">Average Rating</h2>
+      <div class="d-flex align-items-center justify-content-between">
+        <p class="mb-0">Neutral</p>
+        {% include 'main/rated.html' with rating=daily_rating %}
+      </div>
+    </div>
+
+    {% comment %} Average Sleep {% endcomment %}
+    <div class="text-dark-purple rounded-card d-flex justify-content-between align-items-center">
+      <h2 class="heading-2"><span class="iconify mr-2" data-icon="akar-icons:moon" data-height="14"></span> Sleep Duration</h2>
+      <p class="text-right">about 8 hours</p>
+    </div>
+
+    {% comment %} Average Water Intake {% endcomment %}
+    <div class="text-dark-purple rounded-card d-flex justify-content-between align-items-center">
+      <h2 class="heading-2"><span class="iconify mr-2" data-icon="gg:glass-alt" data-height="14"></span> Water Intake</h2>
+      <p class="text-right">about 5 glasses</p>
+    </div>
+
+    {% comment %} Average Food Intake {% endcomment %}
+    <div class="text-dark-purple rounded-card d-flex justify-content-between align-items-center">
+      <h2 class="heading-2"><span class="iconify mr-2" data-icon="fluent:food-24-filled" data-height="14"></span> Food Intake</h2>
+      <p class="text-right">about 2 meals</p>
+    </div>
+
+    {% comment %} Average Rating {% endcomment %}
+    <div class="text-dark-purple rounded-card">
+      <h2 class="heading-2 mb-3">Tidiness Rating</h2>
+      <div class="d-flex align-items-center justify-content-between">
+        <p class="mb-0">Tidy</p>
+        {% include 'main/rated.html' with rating=tidiness_rating %}
+      </div>
+    </div>
+
+
+    <a href="#"><button class="btn btn-purple">View Entries <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
   </section>
 
 </div>
