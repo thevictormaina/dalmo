@@ -31,6 +31,15 @@ $colors: (
         background-color: $color;
         color: checkBgColor($color);
     }
+    .btn-#{$colorName} {
+        background-color: $color;
+        color: checkBgColor($color);
+        transition: 400ms;
+        &:hover, &:focus {
+            color: checkBgColor($color);
+            background-color: darken($color, 5%);
+        }
+    }
     .text-#{$colorName}, .color-#{$colorName} {
         color: $color;
     }
