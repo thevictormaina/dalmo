@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'livereload',
     'django.contrib.staticfiles',
-    'main'
+    'main',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'dalmo.urls'
@@ -129,6 +131,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     ("css", os.path.join(BASE_DIR, "static/css/")),
     ("images", os.path.join(BASE_DIR, "static/images/")),
+    ("js", os.path.join(BASE_DIR, "static/js/")),
 ]
 
 # Default primary key field type

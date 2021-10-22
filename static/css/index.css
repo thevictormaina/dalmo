@@ -302,14 +302,62 @@ input[type=date]::-webkit-calendar-picker-indicator {
   outline: none;
 }
 
+#addButton {
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+  width: 100%;
+  border: none;
+  font-family: "Raleway", sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  background-color: #8429A1;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  transition: 300ms;
+  z-index: 1;
+}
+@media screen and (min-width: 720px) {
+  #addButton {
+    margin-right: calc((100% - 720px) / 2);
+  }
+}
+#addButton:focus {
+  outline: none;
+}
+#addButton:hover {
+  background-color: #73248d;
+}
+#addButton.clicked {
+  transform: rotate(135deg);
+}
+
 body, html {
   box-sizing: border-box;
+}
+body a:hover, html a:hover {
+  text-decoration: none;
 }
 body .vertical-align-top, html .vertical-align-top {
   vertical-align: top;
 }
 body .vertical-align-middle, html .vertical-align-middle {
   vertical-align: middle;
+}
+body .navbar, html .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 1;
+}
+body .navbar + .navbarPadding, html .navbar + .navbarPadding {
+  width: 100%;
+  height: 40.5px;
 }
 body footer, html footer {
   border-top: 1px solid #E5E9F5;
@@ -330,6 +378,35 @@ body footer, html footer {
 }
 .navbar-toggler:focus {
   outline: none;
+}
+
+#addOverlay {
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.85);
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: 250ms;
+  padding-bottom: 60px;
+  padding-right: 15px;
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  transition: 300ms;
+}
+#addOverlay.overlayActive {
+  display: flex;
+  opacity: 1;
+  pointer-events: initial;
+}
+#addOverlay button {
+  max-width: max-content;
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
 }
 
 /*# sourceMappingURL=index.css.map */

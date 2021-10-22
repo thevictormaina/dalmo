@@ -8,6 +8,7 @@ Django = "*"
 django-environ = "*"
 auto-gitignore = "*"
 psycopg2 = "*"
+django-livereload-server = "*"
 
 [dev-packages]
 

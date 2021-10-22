@@ -3,12 +3,10 @@
 {% block body %}
 
 <div class="container">
-
   <div class="rounded-card">
     <h1 class="title-2 text-purple mb-1">Good morning <span class="iconify ml-3" data-icon="fa-solid:sun"></span></h1>
     <p>Remember to make an entry today.</p>
   </div>
-
   {% include 'main/date_selector.html' %}
 
   {% comment %} MOMENT SECTION {% endcomment %}
@@ -77,11 +75,8 @@
         {% include 'main/rated.html' with rating=tidiness_rating %}
       </div>
     </div>
-
-
     <a href="#"><button class="btn btn-purple">View Entries <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
   </section>
-
 </div>
 
 {% endblock body %}

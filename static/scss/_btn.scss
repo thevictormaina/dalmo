@@ -1,12 +1,12 @@
-@use 'config';
-@use 'fonts';
+@use "config";
+@use "fonts";
 
 @mixin button {
     width: 100%;
     border: none;
     @include fonts.headingTitle(13px);
     text-transform: uppercase;
-    
+
     &:focus {
         outline: none;
     }
@@ -22,5 +22,32 @@
         padding: 0.5rem 1rem;
         margin-top: 1rem;
         border-radius: 5px;
+    }
+}
+
+#addButton {
+    position: fixed;
+    bottom: 20px;
+    right: 15px;
+
+    @media screen and (min-width: 720px) {
+        margin-right: calc((100% - 720px)/2);
+    }
+
+    @include button;
+    border-radius: 50px;
+    width: 40px;
+    height: 40px;
+    background-color: config.color("purple");
+    box-shadow: 1px 1px 5px rgba($color: #000000, $alpha: 0.2);
+    transition: 300ms;
+    z-index: 1;
+
+    &:hover {
+        background-color: darken($color: config.color("purple"), $amount: 5%);
+    }
+
+    &.clicked {
+        transform: rotate(135deg);
     }
 }
