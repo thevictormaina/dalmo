@@ -1,0 +1,8 @@
+{% extends 'main/base.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="rounded-card text-purple text-center title-2">Daily Entries</div>
+    {% include 'main/date_selector.html' with variant=2 %}
+</div>
+{% endblock body %}

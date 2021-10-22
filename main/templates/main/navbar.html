@@ -1,8 +1,8 @@
 {% load static %}
 <nav class="navbar container">
   {% if request.path != '/' %}
-  <a href="">
-    <button class="btn"><span class="iconify color-dark-purple" data-icon="akar-icons:arrow-left" data-width="18"></span></button>
+  <a href="javascript:history.back()">
+    <div><span class="iconify color-dark-purple" data-icon="akar-icons:arrow-left" data-width="18"></span></div>
   </a>
   {% endif %}
 

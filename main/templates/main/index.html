@@ -7,7 +7,8 @@
     <h1 class="title-2 text-purple mb-1">Good morning <span class="iconify ml-3" data-icon="fa-solid:sun"></span></h1>
     <p>Remember to make an entry today.</p>
   </div>
-  {% include 'main/date_selector.html' %}
+
+  {% include 'main/date_selector.html' with variant=1 %}
 
   {% comment %} MOMENT SECTION {% endcomment %}
   <section class="mb-5">
@@ -26,7 +27,7 @@
         </li>
       </ul>
     </div>
-    <a href="#"><button class="btn btn-purple">View Moments <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
+    <a href="{% url 'main:all_moments' %}"><button class="btn btn-purple">View Moments <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
   </section>
 
   {% comment %} ENTRY SECTION {% endcomment %}
