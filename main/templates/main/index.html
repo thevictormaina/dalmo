@@ -14,17 +14,21 @@
   <section class="mb-5">
     <div class="d-flex align-items-center justify-content-between mb-3">
       <h1 class="title-2">Moments</h1>
-      <div class="heading-2">7 Moments</div>
+      <div class="heading-2">{{ moments_number }} moment{{ moments_number|pluralize }}</div>
     </div>
     <p class="mb-4">Emotions from recorded moments in selected daterange.</p>
     <div class="rounded-card">
       <ul class="p-0 m-0">
-        {% comment %} Add for loop here {% endcomment %}
+
+        {% for emotion in emotions %}
         <li class="d-flex py-2 align-items-center">
-          <p class="m-0">happy</p>
+          <p class="m-0">{{ emotion.emotion }}</p>
           <hr>
-          <p class="m-0 font-weight-bold text-dark-purple">2</p>
+          <p class="m-0 font-weight-bold text-dark-purple">{{ emotion.count }}</p>
         </li>
+        {% empty %}
+        <li class="d-flex py-2 align-items-center">No emotions</li>
+        {% endfor %}
       </ul>
     </div>
     <a href="{% url 'main:all_moments' %}"><button class="btn btn-purple">View Moments <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
