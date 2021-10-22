@@ -5,6 +5,11 @@ input {
     border: none;
     border-bottom: 3px config.color('light-pink') solid;
     width: 100%;
+    transition: 300ms;
+    
+    &:focus {
+        border-bottom: 3px config.color('lavender-gray') solid;
+    }
 
     &[type="date"]{
         width: max-content;

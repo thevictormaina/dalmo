@@ -261,6 +261,10 @@ input {
   border: none;
   border-bottom: 3px #FFBEFF solid;
   width: 100%;
+  transition: 300ms;
+}
+input:focus {
+  border-bottom: 3px #BDC0DB solid;
 }
 input[type=date] {
   width: max-content;
