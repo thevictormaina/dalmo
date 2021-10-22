@@ -39,18 +39,19 @@
     <div class="d-flex align-items-center justify-content-between mb-3">
       <h1 class="title-2">Entries</h1>
       {% comment %} Add if else statement here for plural {% endcomment %}
-      <div class="heading-2">3 Entries</div>
+      <div class="heading-2">{{ entries_amount }} Entr{{ entries_amount|pluralize:'y,ies' }}</div>
     </div>
     <p class="mb-4">Calculated averages of all daily entries in the selected date range.</p>
 
     {% comment %} DYNAMIC AREA - Interpolate data here {% endcomment %}
-    
+
+    {% if check_entry %}    
     {% comment %} Average Rating {% endcomment %}
     <div class="text-dark-purple rounded-card">
       <h2 class="heading-2 mb-3">Average Rating</h2>
       <div class="d-flex align-items-center justify-content-between">
-        <p class="mb-0">Neutral</p>
-        {% include 'main/rated.html' with rating=daily_rating %}
+        <p class="mb-0">{{ average_rating.label|capfirst }}</p>
+        {% include 'main/rated.html' with rating=average_rating.value %}
       </div>
     </div>
 
@@ -72,7 +73,7 @@
       <p class="text-right">about 2 meals</p>
     </div>
 
-    {% comment %} Average Rating {% endcomment %}
+    {% comment %} Average Tidiness Rating {% endcomment %}
     <div class="text-dark-purple rounded-card">
       <h2 class="heading-2 mb-3">Tidiness Rating</h2>
       <div class="d-flex align-items-center justify-content-between">
@@ -81,7 +82,12 @@
       </div>
     </div>
     <a href="#"><button class="btn btn-purple">View Entries <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
+    {% else %}
+    <div class="rounded-card">No entries</div>
+    {% endif %}
   </section>
+
+
 </div>
 
 {% endblock body %}

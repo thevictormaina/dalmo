@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils import timezone
 
-from main.models import Moment
+from main.models import Entry, Moment
 
 today = timezone.now()
 week_ago = today - timezone.timedelta(days=7)
@@ -18,6 +18,9 @@ def index(request):
     moments = Moment.date_range(from_date, to_date)
     emotions = Moment.count_emotions(from_date, to_date)
     emotions.sort(key=lambda f: f['count'], reverse=True)
+    entries = Entry.date_range(from_date, to_date)
+    check_entry = True if len(entries) > 0 else False
+    average_rating = Entry.average_rating(from_date, to_date)
 
     ctx = { 
         "title": "Know Yourself",
@@ -25,7 +28,9 @@ def index(request):
         "to_date": to_date,
         "moments_number": len(moments),
         "emotions": emotions,
-        "daily_rating": 3, # Change to entry object
+        "check_entry": check_entry,
+        "entries_amount": len(entries),
+        "average_rating": average_rating,
         "tidiness_rating": 2, # Change as well
         }
 

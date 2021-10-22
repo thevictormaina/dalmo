@@ -62,14 +62,7 @@ class Entry(models.Model):
         BAD = 2, ('bad')
         VERY_BAD = 1, ('really bad')
 
-    rating = models.PositiveIntegerField(choices=DayRating.choices)
-    sleep_time = models.DateTimeField()
-    wake_time = models.DateTimeField()
-    meals_amount = models.PositiveIntegerField()
-    snacks = models.BooleanField(default=False)
-    water_amount = models.PositiveIntegerField()
-
-    class TidyRating(models.IntegerChoices):
+    class TidinessRating(models.IntegerChoices):
         """Integer choices for tidiness datings"""
         VERY_TIDY = 5, ('really tidy')
         TIDY = 4, ('tidy')
@@ -77,7 +70,13 @@ class Entry(models.Model):
         UNTIDY = 2, ('untidy')
         VERY_UNTIDY = 1, ('really untidy')
 
-    tidiness_rating = models.PositiveIntegerField(choices=TidyRating.choices)
+    rating = models.PositiveIntegerField(choices=DayRating.choices)
+    sleep_time = models.DateTimeField()
+    wake_time = models.DateTimeField()
+    meals_amount = models.PositiveIntegerField()
+    snacks = models.BooleanField(default=False)
+    water_amount = models.PositiveIntegerField()
+    tidiness_rating = models.PositiveIntegerField(choices=TidinessRating.choices)
     date_added = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='entries')
 
@@ -98,3 +97,21 @@ class Entry(models.Model):
         """Returns all Moment instances from the same date as Entry instance."""
         moments = Moment.objects.filter(date_added__date = self.date_added.date()).all()
         return moments
+
+    @classmethod
+    def date_range(cls, from_date, to_date):
+        """Return list of entries within a given date range"""
+        from_date = timezone.datetime.strptime(from_date, date_format)
+        to_date = timezone.datetime.strptime(to_date, date_format)
+        entries = cls.objects.filter(
+            date_added__date__gte=from_date.date(),
+            date_added__date__lte=to_date.date()).all()
+        return entries
+
+    @classmethod
+    def average_rating(cls, from_date, to_date):
+        """Return average daily rating of entries in date range"""
+        entries = cls.date_range(from_date, to_date)
+        if entries:
+            average_rating = sum([entry.rating for entry in entries]) / len(entries)
+            return cls.DayRating(average_rating)
