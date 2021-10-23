@@ -1,4 +1,5 @@
 {% extends 'main/base.html' %}
+{% load duration %}
 
 {% block body %}
 
@@ -58,27 +59,27 @@
     {% comment %} Average Sleep {% endcomment %}
     <div class="text-dark-purple rounded-card d-flex justify-content-between align-items-center">
       <h2 class="heading-2"><span class="iconify mr-2" data-icon="akar-icons:moon" data-height="14"></span> Sleep Duration</h2>
-      <p class="text-right">about 8 hours</p>
+      <p class="text-right">about {{ sleep_duration|duration }}</p>
     </div>
 
     {% comment %} Average Water Intake {% endcomment %}
     <div class="text-dark-purple rounded-card d-flex justify-content-between align-items-center">
-      <h2 class="heading-2"><span class="iconify mr-2" data-icon="gg:glass-alt" data-height="14"></span> Water Intake</h2>
-      <p class="text-right">about 5 glasses</p>
+      <h2 class="heading-2"><span class="iconify mr-2" data-icon="gg:glass-alt" data-height="14"></span> Water</h2>
+      <p class="text-right">about {{ average_water }} glass{{ average_water|pluralize:"es" }}</p>
     </div>
 
     {% comment %} Average Food Intake {% endcomment %}
     <div class="text-dark-purple rounded-card d-flex justify-content-between align-items-center">
-      <h2 class="heading-2"><span class="iconify mr-2" data-icon="fluent:food-24-filled" data-height="14"></span> Food Intake</h2>
-      <p class="text-right">about 2 meals</p>
+      <h2 class="heading-2"><span class="iconify mr-2" data-icon="fluent:food-24-filled" data-height="14"></span> Meals</h2>
+      <p class="text-right">about {{ average_meals }} meal{{ average_water|pluralize }}</p>
     </div>
 
     {% comment %} Average Tidiness Rating {% endcomment %}
     <div class="text-dark-purple rounded-card">
       <h2 class="heading-2 mb-3">Tidiness Rating</h2>
       <div class="d-flex align-items-center justify-content-between">
-        <p class="mb-0">Tidy</p>
-        {% include 'main/rated.html' with rating=tidiness_rating %}
+        <p class="mb-0">{{ average_tidiness.label|capfirst }}</p>
+        {% include 'main/rated.html' with rating=average_tidiness.value %}
       </div>
     </div>
     <a href="#"><button class="btn btn-purple">View Entries <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>

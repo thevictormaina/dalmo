@@ -98,6 +98,12 @@ class Entry(models.Model):
         moments = Moment.objects.filter(date_added__date = self.date_added.date()).all()
         return moments
 
+    @property
+    def sleep_duration(self):
+        """Calculates sleep duration based on sleep and wake up times and returns value in seconds"""
+        sleep_duration = self.wake_time - self.sleep_time
+        return sleep_duration.seconds
+
     @classmethod
     def date_range(cls, from_date, to_date):
         """Return list of entries within a given date range"""
@@ -114,4 +120,30 @@ class Entry(models.Model):
         entries = cls.date_range(from_date, to_date)
         if entries:
             average_rating = sum([entry.rating for entry in entries]) / len(entries)
-            return cls.DayRating(average_rating)
+            return cls.DayRating(round(average_rating))
+
+    @classmethod
+    def average_sleep_duration(cls, from_date, to_date):
+        """Return average sleep duration of entries in date range"""
+        entries = cls.date_range(from_date, to_date)
+        return round(sum([e.sleep_duration for e in entries]) / len(entries))
+
+    @classmethod
+    def average_meals_amount(cls, from_date, to_date):
+        """Return average number of meals had per day in given time period"""
+        entries = cls.date_range(from_date, to_date)
+        return round(sum([e.meals_amount for e in entries]) / len(entries))
+
+    @classmethod
+    def average_water_amount(cls, from_date, to_date):
+        """Return average number of water glasses had per day in given time period"""
+        entries = cls.date_range(from_date, to_date)
+        return round(sum([e.water_amount for e in entries]) / len(entries))
+
+    @classmethod
+    def average_tidiness_rating(cls, from_date, to_date):
+        """Return average tidiness rating of entries in date range"""
+        entries = cls.date_range(from_date, to_date)
+        if entries:
+            average_tidiness = sum([entry.tidiness_rating for entry in entries]) / len(entries)
+            return cls.DayRating(round(average_tidiness))

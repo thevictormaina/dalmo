@@ -21,6 +21,10 @@ def index(request):
     entries = Entry.date_range(from_date, to_date)
     check_entry = True if len(entries) > 0 else False
     average_rating = Entry.average_rating(from_date, to_date)
+    sleep_duration = Entry.average_sleep_duration(from_date, to_date)
+    average_meals = Entry.average_meals_amount(from_date, to_date)
+    average_water = Entry.average_water_amount(from_date, to_date)
+    average_tidiness = Entry.average_tidiness_rating(from_date, to_date)
 
     ctx = { 
         "title": "Know Yourself",
@@ -31,7 +35,10 @@ def index(request):
         "check_entry": check_entry,
         "entries_amount": len(entries),
         "average_rating": average_rating,
-        "tidiness_rating": 2, # Change as well
+        "sleep_duration": sleep_duration,
+        "average_meals": average_meals,
+        "average_water": average_water,
+        "average_tidiness": average_tidiness
         }
 
     return render(request, 'main/index.html', ctx)
