@@ -126,19 +126,22 @@ class Entry(models.Model):
     def average_sleep_duration(cls, from_date, to_date):
         """Return average sleep duration of entries in date range"""
         entries = cls.date_range(from_date, to_date)
-        return round(sum([e.sleep_duration for e in entries]) / len(entries))
+        if entries:
+            return round(sum([e.sleep_duration for e in entries]) / len(entries))
 
     @classmethod
     def average_meals_amount(cls, from_date, to_date):
         """Return average number of meals had per day in given time period"""
         entries = cls.date_range(from_date, to_date)
-        return round(sum([e.meals_amount for e in entries]) / len(entries))
+        if entries:
+            return round(sum([e.meals_amount for e in entries]) / len(entries))
 
     @classmethod
     def average_water_amount(cls, from_date, to_date):
         """Return average number of water glasses had per day in given time period"""
         entries = cls.date_range(from_date, to_date)
-        return round(sum([e.water_amount for e in entries]) / len(entries))
+        if entries:
+            return round(sum([e.water_amount for e in entries]) / len(entries))
 
     @classmethod
     def average_tidiness_rating(cls, from_date, to_date):
