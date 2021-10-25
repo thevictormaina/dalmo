@@ -53,10 +53,6 @@ def all_moments(request):
         to_date = today.strftime('%Y-%m-%d')
 
     moments_by_date = Moment.sort_by_date(from_date, to_date)
-    
-    print("DATES: ", moments_by_date, "\n")
-    print(to_date)
-
 
     ctx = { 
         "title": "Entries",

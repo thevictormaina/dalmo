@@ -17,13 +17,13 @@ class User(AbstractUser):
 class Moment(models.Model):
     feeling = models.CharField(max_length=50)
     cause = models.CharField(max_length=300)
-    date_added = models.DateTimeField(auto_now=True)
+    date_added = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='moments')
 
     def save(self, *args, **kwargs):
         """Overriding default save method to save date and time instance is created."""
         if not self.id:
-            self.date_added = timezone.localtime() - timezone.timedelta(days=7)
+            self.date_added = self.date_added if self.date_added else timezone.datetime()
             self.feeling = self.feeling.lower()
         return super(Moment, self).save(*args, *kwargs)
 
@@ -54,10 +54,10 @@ class Moment(models.Model):
     def sort_by_date(cls, from_date, to_date, moments=None):
         """Return dictionary of moments sorted by date"""
         moments = moments if moments else cls.date_range(from_date, to_date)
-        dates = [d for d in {m.date_added.date() for m in moments}]
+        dates = [d for d in { m.date_added.date() for m in moments }]
         dates.sort(reverse=True)
+        print(dates)
         return [{"date":d, "moments":moments.filter(date_added__date=d)} for d in dates]
-
 
     @classmethod
     def count_emotions(cls, from_date, to_date):
