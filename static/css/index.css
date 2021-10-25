@@ -75,6 +75,25 @@
   color: #E5E9F5;
 }
 
+.bg-light-gray-2 {
+  background-color: #A6A9B3;
+  color: #631A79;
+}
+
+.btn-light-gray-2 {
+  background-color: #A6A9B3;
+  color: #631A79;
+  transition: 400ms;
+}
+.btn-light-gray-2:hover, .btn-light-gray-2:focus {
+  color: #631A79;
+  background-color: #989ca7;
+}
+
+.text-light-gray-2, .color-light-gray-2 {
+  color: #A6A9B3;
+}
+
 .bg-light-pink {
   background-color: #FFBEFF;
   color: #631A79;
@@ -195,6 +214,7 @@ html {
   font-size: 14px;
   font-weight: 500;
   color: #33354D;
+  font-feature-settings: "lnum" 1;
 }
 body p, body h1, body h2, body h3,
 html p,
@@ -338,8 +358,24 @@ input[type=date]::-webkit-calendar-picker-indicator, select[type=date]::-webkit-
   transform: rotate(135deg);
 }
 
+table tr {
+  border-bottom: 1px solid #E5E9F5;
+}
+table tr:last-child {
+  border-bottom: none;
+}
+table tr td {
+  padding: 1rem 0;
+}
+table tr td a:hover .text-purple {
+  color: #631A79;
+}
+
 body, html {
   box-sizing: border-box;
+}
+body a, html a {
+  transition: 300ms;
 }
 body a:hover, html a:hover {
   text-decoration: none;
@@ -375,6 +411,12 @@ body footer, html footer {
   color: #8429A1;
   font-size: 12px;
   text-align: center;
+}
+body footer + div, html footer + div {
+  content: "";
+  position: relative;
+  height: 30px;
+  margin-top: 30px;
 }
 
 .container {

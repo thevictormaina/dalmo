@@ -13,6 +13,7 @@ html {
     font-size: 14px;
     font-weight: 500;
     color: config.color('dark-gray');
+    font-feature-settings: 'lnum' 1;
 
     p, h1, h2, h3 {
         margin-bottom: 0;

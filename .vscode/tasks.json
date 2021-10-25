@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "server",
+            "type": "shell",
+            "command": "${config:python.defaultInterpreterPath} manage.py runserver",
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "sass",
+            "type": "shell",
+            "command": "sass --watch static/scss/:static/css/",
+            "windows": {
+                "command": "sass --watch static/scss/:static/css/"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "livereload",
+            "type": "shell",
+            "command": "${config:python.defaultInterpreterPath} manage.py livereload",
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+    ]
+}

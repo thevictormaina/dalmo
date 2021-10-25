@@ -82,7 +82,7 @@
         {% include 'main/rated.html' with rating=average_tidiness.value %}
       </div>
     </div>
-    <a href="#"><button class="btn btn-purple">View Entries <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
+    <a href="{% url 'main:all_entries' %}"><button class="btn btn-purple">View Entries <span class="iconify" data-icon="fluent:arrow-right-16-filled" data-height="16"></span></button></a>
     {% else %}
     <div class="rounded-card">No entries</div>
     {% endif %}

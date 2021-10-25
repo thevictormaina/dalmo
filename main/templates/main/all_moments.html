@@ -2,7 +2,31 @@
 
 {% block body %}
 <div class="container">
-    <div class="rounded-card text-purple text-center title-2">Daily Entries</div>
-    {% include 'main/date_selector.html' with variant=2 %}
+    <div class="rounded-card text-purple text-center title-2">Moments</div>
+    {% include 'main/date_selector.html' with variant=1 %}
 </div>
+
+{% for date in moments_by_date %}
+<div class="container">
+    <h2 class="heading-2 my-3">{{ date.date }}</h2>
+    <table class="w-100">
+        {% for moment in date.moments  %}
+            <tr>
+                <td>
+                    <a href="">
+                        <div class="w-100">
+                        <span class="text-purple mr-2">{{ moment.feeling|lower }}</span>
+                        <span class="text-light-gray-2">because {{ moment.cause|truncatewords:3 }}</span>
+                        </div>
+                    </a>
+                </td>
+                <td class="text-right">{{ moment.date_added.time }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% empty %}
+<div class="container heading-2">No moments</div>
+{% endfor %}
+
 {% endblock body %}

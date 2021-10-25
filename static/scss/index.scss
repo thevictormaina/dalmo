@@ -3,12 +3,16 @@
 @use 'cards';
 @use 'inputs';
 @use 'btn';
+@use 'table';
 
 body, html {
     box-sizing: border-box;
 
-    a:hover {
-        text-decoration: none;
+    a {
+        transition: 300ms;
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     .vertical-align {
@@ -47,6 +51,13 @@ body, html {
         color: config.color('purple');
         font-size: 12px;
         text-align: center;
+
+        & + div {
+            content: "";
+            position: relative;
+            height: 30px;
+            margin-top: 30px;
+        }
     }
 
 }

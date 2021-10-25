@@ -23,7 +23,7 @@ class Moment(models.Model):
     def save(self, *args, **kwargs):
         """Overriding default save method to save date and time instance is created."""
         if not self.id:
-            self.date_added = timezone.now()
+            self.date_added = timezone.localtime() - timezone.timedelta(days=7)
             self.feeling = self.feeling.lower()
         return super(Moment, self).save(*args, *kwargs)
 
@@ -39,12 +39,25 @@ class Moment(models.Model):
     @classmethod
     def date_range(cls, from_date, to_date):
         """Return list of moments within a given date range"""
-        from_date = timezone.datetime.strptime(from_date, date_format)
-        to_date = timezone.datetime.strptime(to_date, date_format)
-        moments = cls.objects.filter(
-            date_added__date__gte=from_date.date(),
-            date_added__date__lte=to_date.date()).all()
+        from_date = timezone.localtime().strptime(from_date, date_format)
+        to_date = timezone.localtime().strptime(to_date, date_format)
+        moments = cls.objects.filter(date_added__date__range=[from_date, to_date]).all()
         return moments
+
+    def from_same_date(self):
+        """Return other moments from the same date as instance"""
+        cls = self.__class__
+        moments = {"date":self.date_added.date(), "moments":[m for m in cls.objects.filter(date_added__date = self.date_added.date()).all()]}
+        return moments
+
+    @classmethod
+    def sort_by_date(cls, from_date, to_date, moments=None):
+        """Return dictionary of moments sorted by date"""
+        moments = moments if moments else cls.date_range(from_date, to_date)
+        dates = [d for d in {m.date_added.date() for m in moments}]
+        dates.sort(reverse=True)
+        return [{"date":d, "moments":moments.filter(date_added__date=d)} for d in dates]
+
 
     @classmethod
     def count_emotions(cls, from_date, to_date):
@@ -86,7 +99,7 @@ class Entry(models.Model):
     def save(self, *args, **kwargs):
         """Overriding default save method to save date and time instance is created."""
         if not self.id:
-            self.date_added = timezone.now()
+            self.date_added = timezone.localtime() - timezone.timedelta(days=7)
         return super(Entry, self).save(*args, *kwargs)
 
     def __str__(self):

@@ -1,10 +1,11 @@
+from datetime import tzinfo
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.utils import timezone
 
 from main.models import Entry, Moment
 
-today = timezone.now()
+today = timezone.localtime()
 week_ago = today - timezone.timedelta(days=7)
 
 def index(request):
@@ -51,9 +52,20 @@ def all_moments(request):
         from_date = week_ago.strftime('%Y-%m-%d')
         to_date = today.strftime('%Y-%m-%d')
 
+    moments_by_date = Moment.sort_by_date(from_date, to_date)
+    
+    print("DATES: ", moments_by_date, "\n")
+    print(to_date)
+
+
     ctx = { 
         "title": "Entries",
         "from_date": from_date,
         "to_date": to_date,
+        "moments_by_date": moments_by_date
         }
     return render(request, 'main/all_moments.html', ctx)
+
+def all_entries(request):
+    ctx = {}
+    return render(request, "main/all_entries.html", ctx)

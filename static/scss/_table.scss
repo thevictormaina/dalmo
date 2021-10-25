@@ -1,0 +1,16 @@
+@use 'config';
+
+table {
+    tr {
+        border-bottom: 1px solid config.color('light-gray');
+        &:last-child {
+            border-bottom: none;
+        }
+        td {
+            padding: 1rem 0;
+            a:hover .text-purple {
+                color: config.color('dark-purple');
+            }
+        }
+    }
+}

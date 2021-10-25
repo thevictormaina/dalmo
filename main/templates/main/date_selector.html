@@ -7,14 +7,21 @@
         <input name="from-date" id="from-date" type="date" value={{ from_date }}>
       </div>
       <div>
-        <label for="to-date"class="text-dark-purple     mr-2">to</label>
+        <label for="to-date" class="text-dark-purple mr-2">to</label>
         <input name="to-date" id="to-date" type="date" value={{ to_date }}>
       </div>
     </div>
 
     {% if variant == 2 %}
+    <div class="mt-2 d-flex align-items-center">
+      <label for="search" class="text-dark-purple m-0 mr-3"><span class="iconify" data-icon="fe:search" data-width="18"></span></label>
+      <input name="search" id="search" type="text" class="flex-fill" placeholder="Search for feelings or causes">
+    </div>
+    {% endif %}
+
+    {% if variant == 3 %}
     <div class="mt-2 d-flex">
-      <label for="sort"class="text-dark-purple mr-2">sort by</label>
+      <label for="sort" class="text-dark-purple mr-2">sort by</label>
       <select class="flex-fill" name="sort" id="sort">
         <option value="date-asc">Date (ascending)</option>
         <option value="date-desc">Date (descending)</option>
