@@ -23,7 +23,7 @@ class Moment(models.Model):
     def save(self, *args, **kwargs):
         """Overriding default save method to save date and time instance is created."""
         if not self.id:
-            self.date_added = self.date_added if self.date_added else timezone.datetime()
+            self.date_added = self.date_added if self.date_added else timezone.localtime()
             self.feeling = self.feeling.lower()
         return super(Moment, self).save(*args, *kwargs)
 
@@ -41,7 +41,7 @@ class Moment(models.Model):
         """Return list of moments within a given date range"""
         from_date = timezone.localtime().strptime(from_date, date_format)
         to_date = timezone.localtime().strptime(to_date, date_format)
-        moments = cls.objects.filter(date_added__date__range=[from_date, to_date]).all()
+        moments = cls.objects.filter(date_added__date__range=[from_date, to_date])
         return moments
 
     def from_same_date(self):
@@ -55,9 +55,9 @@ class Moment(models.Model):
         """Return dictionary of moments sorted by date"""
         moments = moments if moments else cls.date_range(from_date, to_date)
         dates = [d for d in { m.date_added.date() for m in moments }]
-        dates.sort(reverse=True)
-        print(dates)
-        return [{"date":d, "moments":moments.filter(date_added__date=d)} for d in dates]
+        dated_moments = [{"date":d, "moments":moments.filter(date_added__date=d).order_by("-date_added")} for d in dates]
+        dated_moments.sort(key=lambda m: m['date'], reverse=True)
+        return dated_moments
 
     @classmethod
     def count_emotions(cls, from_date, to_date):
@@ -65,6 +65,11 @@ class Moment(models.Model):
         moments = list(cls.date_range(from_date, to_date)) 
         feeling_counts = [dict(feeling_count) for feeling_count in {tuple(feeling.items()) for feeling in [{"emotion":moment.feeling, "count":moment.count_feeling} for moment in moments]}]
         return feeling_counts
+
+    @classmethod
+    def search_moments(cls, search_term=""):
+        """Return queryset of moments by searching for feelings and causes"""
+        return cls.objects.filter(feeling__icontains = search_term).order_by('-date_added')
 
 class Entry(models.Model):
     class DayRating(models.IntegerChoices):

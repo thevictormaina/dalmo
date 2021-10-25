@@ -48,17 +48,20 @@ def all_moments(request):
     if request.GET:
         from_date = request.GET['from-date']
         to_date = request.GET['to-date']
+        search_term = request.GET['search']
+        moments_by_date = Moment.sort_by_date(from_date, to_date, Moment.search_moments(search_term=search_term))
     else:
         from_date = week_ago.strftime('%Y-%m-%d')
         to_date = today.strftime('%Y-%m-%d')
-
-    moments_by_date = Moment.sort_by_date(from_date, to_date)
+        search_term = ""
+        moments_by_date = Moment.sort_by_date(from_date, to_date)
 
     ctx = { 
         "title": "Entries",
         "from_date": from_date,
         "to_date": to_date,
-        "moments_by_date": moments_by_date
+        "moments_by_date": moments_by_date,
+        "search_term": search_term
         }
     return render(request, 'main/all_moments.html', ctx)
 

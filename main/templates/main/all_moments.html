@@ -3,12 +3,14 @@
 {% block body %}
 <div class="container">
     <div class="rounded-card text-purple text-center title-2">Moments</div>
-    {% include 'main/date_selector.html' with variant=1 %}
+    {% include 'main/date_selector.html' with variant=2 %}
 </div>
 
 {% for date in moments_by_date %}
 <div class="container">
+    {% if date.moments %}
     <h2 class="heading-2 my-3">{{ date.date }}</h2>
+    {% endif %}
     <table class="w-100">
         {% for moment in date.moments  %}
             <tr>
