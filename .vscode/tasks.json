@@ -56,6 +56,20 @@
                 "runOn": "default"
             },
             "problemMatcher": []
+        },
+        {
+            "label": "test",
+            "type": "shell",
+            "command": "${config:python.defaultInterpreterPath} manage.py test",
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "runOptions": {
+                "runOn": "default"
+            },
+            "problemMatcher": []
         }
     ]
 }

@@ -12,14 +12,13 @@ def index(request):
     if request.GET:
         from_date = request.GET['from-date']
         to_date = request.GET['to-date']
-    else:
-        from_date = week_ago.strftime('%Y-%m-%d')
-        to_date = today.strftime('%Y-%m-%d')
+        moments = Moment.list_all()
+        
 
-    moments = Moment.date_range(from_date, to_date)
+    moments = Moment.list_all(from_date, to_date)
     emotions = Moment.count_emotions(from_date, to_date)
     emotions.sort(key=lambda f: f['count'], reverse=True)
-    entries = Entry.date_range(from_date, to_date)
+    entries = Entry.list_all(from_date, to_date)
     check_entry = True if len(entries) > 0 else False
     average_rating = Entry.average_rating(from_date, to_date)
     sleep_duration = Entry.average_sleep_duration(from_date, to_date)
