@@ -10,7 +10,7 @@ date_format = '%Y-%m-%d' # Used by multiple methods to define format passed in v
 def make_aware_date(str_date, format = date_format):
     """Create timezone aware dates from strings"""
     date = timezone.datetime.strptime(str_date, format)
-    return timezone.make_aware(date)
+    return date
 
 # Extend from default user model.
 class User(AbstractUser):
@@ -42,30 +42,31 @@ class Moment(models.Model):
         return cls.objects.filter(feeling = self.feeling).count()
 
     @classmethod
-    def list_moments(cls, from_date=None, to_date=None):
-        """Return queryset of all moments within a given date range. By default, it will retain all Moment instances."""
-        moments = cls.objects.all().order_by("date_added")
+    def list_moments(cls, from_date=None, to_date=None, search_term=""):
+        """Return queryset of all moments within a given date range that match a given search term. By default, it will retain all Moment instances."""
+        moments = cls.search_moments(search_term).order_by("date_added")
         earliest, latest = moments.first(), moments.last()
         from_date = make_aware_date(from_date) if from_date is not None else earliest.date_added
+        print(f"FROM DATE: {from_date}")
         to_date = make_aware_date(to_date) if to_date is not None else latest.date_added
         return moments.filter(date_added__date__range = [from_date, to_date]).order_by("-date_added")
 
     @classmethod
-    def by_date(cls, from_date=None, to_date=None, moments=None):
+    def by_date(cls, from_date=None, to_date=None, search_term=""):
         """Return dictionary of moments sorted by date within date range. If no range is provided, it will return a sorted list of all moments."""
-        moments = moments if moments else cls.list_moments(from_date, to_date)
+        moments = cls.list_moments(from_date, to_date, search_term)
+        print(moments)
         dates = [d for d in { m.date_added.date() for m in moments }]
-        print(f"DATES: {dates} \n")
         dated_moments = [{"date":d, "moments":moments.filter(date_added__date=d).order_by("-date_added")} for d in dates]
         dated_moments.sort(key=lambda m: m['date'], reverse=True)
         return dated_moments
 
     @classmethod
-    def count_emotions(cls, from_date, to_date):
+    def count_emotions(cls, from_date=None, to_date=None):
         """Return how many times each emotion is saved"""
-        moments = list(cls.list_all(from_date, to_date)) 
+        moments = list(cls.list_moments(from_date, to_date)) 
         feeling_counts = [dict(feeling_count) for feeling_count in {tuple(feeling.items()) for feeling in [{"emotion":moment.feeling, "count":moment.count_feeling} for moment in moments]}]
-        return feeling_counts
+        return sorted(feeling_counts, key=lambda e: e['count'], reverse=True)
 
     @classmethod
     def search_moments(cls, search_term=""):
@@ -124,48 +125,54 @@ class Entry(models.Model):
         return sleep_duration.seconds
 
     @classmethod
-    def list_all(cls, from_date, to_date):
+    def list_entries(cls, from_date=None, to_date=None):
         """Return list of entries within a given date range"""
-        from_date = timezone.datetime.strptime(from_date, date_format)
-        to_date = timezone.datetime.strptime(to_date, date_format)
-        entries = cls.objects.filter(
-            date_added__date__gte=from_date.date(),
-            date_added__date__lte=to_date.date()).all()
-        return entries
+        # from_date = timezone.datetime.strptime(from_date, date_format)
+        # to_date = timezone.datetime.strptime(to_date, date_format)
+        # entries = cls.objects.filter(
+        #     date_added__date__gte=from_date.date(),
+        #     date_added__date__lte=to_date.date()).all()
+        # return entries
+
+        entries = cls.objects.all().order_by("date_added")
+        earliest, latest = entries.first(), entries.last()
+        from_date = make_aware_date(from_date) if from_date is not None else earliest.date_added
+        to_date = make_aware_date(to_date) if to_date is not None else latest.date_added
+        return entries.filter(date_added__date__range=[from_date, to_date]).order_by("-date_added")
 
     @classmethod
-    def average_rating(cls, from_date, to_date):
+    def average_rating(cls, from_date=None, to_date=None):
         """Return average daily rating of entries in date range"""
-        entries = cls.list_all(from_date, to_date)
+        entries = cls.list_entries(from_date, to_date)
         if entries:
             average_rating = sum([entry.rating for entry in entries]) / len(entries)
             return cls.DayRating(round(average_rating))
 
     @classmethod
-    def average_sleep_duration(cls, from_date, to_date):
+    def average_sleep_duration(cls, from_date=None, to_date=None):
         """Return average sleep duration of entries in date range"""
-        entries = cls.list_all(from_date, to_date)
+        entries = cls.list_entries(from_date, to_date)
         if entries:
             return round(sum([e.sleep_duration for e in entries]) / len(entries))
 
     @classmethod
-    def average_meals_amount(cls, from_date, to_date):
+    def average_meals_amount(cls, from_date=None, to_date=None):
         """Return average number of meals had per day in given time period"""
-        entries = cls.list_all(from_date, to_date)
+        entries = cls.list_entries(from_date, to_date)
         if entries:
             return round(sum([e.meals_amount for e in entries]) / len(entries))
 
     @classmethod
-    def average_water_amount(cls, from_date, to_date):
+    def average_water_amount(cls, from_date=None, to_date=None):
         """Return average number of water glasses had per day in given time period"""
-        entries = cls.list_all(from_date, to_date)
+        entries = cls.list_entries(from_date, to_date)
         if entries:
             return round(sum([e.water_amount for e in entries]) / len(entries))
 
     @classmethod
-    def average_tidiness_rating(cls, from_date, to_date):
+    def average_tidiness_rating(cls, from_date=None, to_date=None):
         """Return average tidiness rating of entries in date range"""
-        entries = cls.list_all(from_date, to_date)
+        entries = cls.list_entries(from_date, to_date)
         if entries:
             average_tidiness = sum([entry.tidiness_rating for entry in entries]) / len(entries)
             return cls.DayRating(round(average_tidiness))
